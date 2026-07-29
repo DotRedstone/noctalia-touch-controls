@@ -1,8 +1,6 @@
 {
   "nav": {
-    "back": "Back / Close Window",
-    "home": "Home / Workspaces",
-    "recents": "Recents / Overview",
-    "keyboard": "Toggle Soft Keyboard"
+    "fullscreen": "Toggle Fullscreen",
+    "close": "Close Window"
   }
 }

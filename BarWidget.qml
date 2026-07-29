@@ -11,11 +11,11 @@ Item {
   property var pluginApi: null
   property var screen: null
 
-  implicitWidth: navCapsule.implicitWidth
+  implicitWidth: windowControlCapsule.implicitWidth
   implicitHeight: Style.baseWidgetSize
 
   Rectangle {
-    id: navCapsule
+    id: windowControlCapsule
     anchors.centerIn: parent
     implicitWidth: buttonRow.implicitWidth + Style.marginS * 2
     implicitHeight: Math.round(Style.baseWidgetSize * 0.85)
@@ -27,34 +27,22 @@ Item {
     RowLayout {
       id: buttonRow
       anchors.centerIn: parent
-      spacing: Style.marginXXS
+      spacing: Style.marginXS
 
-      // 1. Back (◀)
+      // 1. 全屏 (Fullscreen)
       NavButton {
-        iconName: "chevron-left"
-        tooltip: pluginApi?.tr("nav.back") ?? "Back"
+        iconName: "maximize"
+        activeColor: Color.mPrimary
+        tooltip: pluginApi?.tr("nav.fullscreen") ?? "Toggle Fullscreen"
+        onPressedAction: function() { root.runNiriAction("fullscreen-window"); }
+      }
+
+      // 2. 关闭窗口 (Close Window)
+      NavButton {
+        iconName: "x"
+        activeColor: Color.mError
+        tooltip: pluginApi?.tr("nav.close") ?? "Close Window"
         onPressedAction: function() { root.runNiriAction("close-window"); }
-      }
-
-      // 2. Home (⚪)
-      NavButton {
-        iconName: "circle"
-        tooltip: pluginApi?.tr("nav.home") ?? "Home"
-        onPressedAction: function() { root.runNiriAction("focus-workspace-down"); }
-      }
-
-      // 3. Recents (⏹)
-      NavButton {
-        iconName: "square"
-        tooltip: pluginApi?.tr("nav.recents") ?? "Recents"
-        onPressedAction: function() { root.runNiriAction("toggle-overview"); }
-      }
-
-      // 4. Keyboard (⌨)
-      NavButton {
-        iconName: "keyboard"
-        tooltip: pluginApi?.tr("nav.keyboard") ?? "Keyboard"
-        onPressedAction: function() { root.runCommand("sheng-niri-osk-toggle"); }
       }
     }
   }
@@ -62,17 +50,18 @@ Item {
   component NavButton: Item {
     id: btn
     property string iconName: ""
+    property color activeColor: Color.mPrimary
     property string tooltip: ""
     property var onPressedAction: null
 
-    implicitWidth: Math.round(Style.baseWidgetSize * 0.85)
+    implicitWidth: Math.round(Style.baseWidgetSize * 0.9)
     implicitHeight: Math.round(Style.baseWidgetSize * 0.75)
 
     Rectangle {
       id: btnBg
       anchors.fill: parent
       radius: height / 2
-      color: tapArea.pressed ? Color.mHover : "transparent"
+      color: tapArea.pressed ? Qt.alpha(btn.activeColor, 0.25) : "transparent"
 
       Behavior on color {
         ColorAnimation {
@@ -84,7 +73,7 @@ Item {
         anchors.centerIn: parent
         icon: btn.iconName
         pointSize: Style.fontSizeL
-        color: tapArea.pressed ? Color.mPrimary : Color.mOnSurface
+        color: tapArea.pressed ? btn.activeColor : Color.mOnSurface
       }
     }
 
@@ -104,16 +93,7 @@ Item {
     niriProcess.running = true;
   }
 
-  function runCommand(cmd) {
-    cmdProcess.command = [cmd];
-    cmdProcess.running = true;
-  }
-
   Process {
     id: niriProcess
-  }
-
-  Process {
-    id: cmdProcess
   }
 }
