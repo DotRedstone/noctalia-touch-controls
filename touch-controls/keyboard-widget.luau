@@ -13,5 +13,7 @@ function update()
 end
 
 function onClick()
-  noctalia.togglePanel(keyboardPanel)
+  if not noctalia.runAsync("sheng-niri-osk-toggle") then
+    noctalia.togglePanel(keyboardPanel)
+  end
 end

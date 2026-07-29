@@ -1,7 +1,7 @@
 [[plugin]]
 id = "dotredstone/touch-controls"
 name = "Touch Controls"
-version = "2.0.1"
+version = "2.1.0"
 author = "DotRedstone"
 license = "MIT"
 icon = "hand-finger"
@@ -9,4 +9,4 @@ description = "Touch-first controls for Noctalia and Niri tablets."
 deprecated = false
 plugin_api = 15
 tags = ["touch", "tablet", "niri", "utility"]
-dependencies = ["sheng-niri-touch-action", "sheng-niri-key", "sheng-niri-display"]
+dependencies = ["sheng-niri-touch-action", "sheng-niri-key", "sheng-niri-display", "sheng-niri-osk-toggle"]
