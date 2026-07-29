@@ -17,7 +17,5 @@ function onClick()
 end
 
 function onRightClick()
-  if not noctalia.runAsync("sheng-niri-osk-toggle") then
-    noctalia.notifyError("Touch Controls", "Unable to toggle the touch keyboard")
-  end
+  noctalia.togglePanel("dotredstone/touch-controls:keyboard")
 end

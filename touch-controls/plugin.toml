@@ -1,14 +1,14 @@
 id = "dotredstone/touch-controls"
 name = "Touch Controls"
-version = "1.2.0"
-plugin_api = 3
+version = "2.0.0"
+plugin_api = 15
 min_noctalia = "5.0.0"
 author = "DotRedstone"
 license = "MIT"
 icon = "hand-finger"
 description = "Touch-first controls for Noctalia and Niri tablets."
 tags = ["touch", "tablet", "niri", "utility"]
-dependencies = ["sheng-niri-touch-action", "sheng-niri-osk-toggle", "sheng-niri-display"]
+dependencies = ["sheng-niri-touch-action", "sheng-niri-key", "sheng-niri-display"]
 
 [[widget]]
 id = "controls"
@@ -26,6 +26,10 @@ entry = "fullscreen.luau"
 id = "close-window"
 entry = "close-window.luau"
 
+[[widget]]
+id = "keyboard-toggle"
+entry = "keyboard-widget.luau"
+
 [[panel]]
 id = "panel"
 entry = "panel.luau"
@@ -33,3 +37,13 @@ width = 560
 height = 500
 placement = "floating"
 position = "center"
+
+[[panel]]
+id = "keyboard"
+entry = "keyboard.luau"
+width = 1120
+height = 390
+position = "bottom_center"
+keyboard_focus = "none"
+dismiss_on_outside_click = false
+persistent = true

@@ -57,7 +57,8 @@ function onClosePanel()
 end
 
 function onKeyboard()
-  run("sheng-niri-osk-toggle", "无法切换屏幕键盘")
+  panel.close()
+  noctalia.togglePanel("dotredstone/touch-controls:keyboard")
 end
 
 function onLauncher()
