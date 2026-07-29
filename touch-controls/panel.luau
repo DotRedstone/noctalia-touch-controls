@@ -22,7 +22,7 @@ end
 local function render()
   panel.render(ui.column({ flexGrow = 1, gap = 12, padding = 12 }, {
     ui.row({ align = "center", justify = "space_between", gap = 8, height = 42 }, {
-      ui.glyph({ name = "grip-horizontal", size = 28, color = "primary" }),
+      ui.glyph({ name = "minus", size = 28, color = "primary" }),
       ui.spacer({ flexGrow = 1 }),
       ui.button({
         glyph = "x",

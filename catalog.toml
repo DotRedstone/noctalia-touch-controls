@@ -1,7 +1,7 @@
 [[plugin]]
 id = "dotredstone/touch-controls"
 name = "Touch Controls"
-version = "2.2.0"
+version = "2.2.1"
 author = "DotRedstone"
 license = "MIT"
 icon = "hand-finger"

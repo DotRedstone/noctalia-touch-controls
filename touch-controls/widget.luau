@@ -3,7 +3,7 @@
 local panelId = "dotredstone/touch-controls:panel"
 
 local function render()
-  barWidget.setGlyph("grip-horizontal")
+  barWidget.setGlyph("minus")
   barWidget.setTooltip("导航与窗口控制")
 end
 
