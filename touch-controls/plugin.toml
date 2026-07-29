@@ -1,6 +1,6 @@
 id = "dotredstone/touch-controls"
 name = "Touch Controls"
-version = "1.0.0"
+version = "1.1.0"
 plugin_api = 3
 min_noctalia = "5.0.0"
 author = "DotRedstone"
@@ -13,6 +13,14 @@ dependencies = ["sheng-niri-touch-action", "sheng-niri-osk-toggle", "sheng-niri-
 [[widget]]
 id = "controls"
 entry = "widget.luau"
+
+[[widget]]
+id = "fullscreen"
+entry = "fullscreen.luau"
+
+[[widget]]
+id = "close-window"
+entry = "close-window.luau"
 
 [[panel]]
 id = "panel"

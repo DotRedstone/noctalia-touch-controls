@@ -6,6 +6,7 @@
 
 `touch-controls/` 是原生 Noctalia v5 插件，提供触控友好的栏入口和大按钮控制面板：
 
+- 独立的全屏与关闭窗口栏按钮
 - 屏幕键盘
 - 应用启动器
 - 控制中心
@@ -26,12 +27,18 @@ location = "https://github.com/DotRedstone/noctalia-touch-controls"
 auto_update = false
 ```
 
-栏组件类型为：
+窗口控制栏组件类型为：
 
 ```toml
-[widget.touch_controls]
-type = "dotredstone/touch-controls:controls"
+[widget.fullscreen_control]
+type = "dotredstone/touch-controls:fullscreen"
+
+[widget.close_window_control]
+type = "dotredstone/touch-controls:close-window"
 ```
+
+原有大按钮控制面板入口仍可使用
+`dotredstone/touch-controls:controls`。
 
 插件调用以下 sheng Niri 辅助命令：
 
