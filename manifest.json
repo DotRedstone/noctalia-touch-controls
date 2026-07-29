@@ -1,0 +1,23 @@
+{
+  "id": "touch-navigation-bar",
+  "name": "Android Touch Navigation",
+  "version": "0.2.0",
+  "minNoctaliaVersion": "3.6.0",
+  "author": "DotRedstone",
+  "license": "MIT",
+  "repository": "https://github.com/DotRedstone/noctalia-touch-controls",
+  "description": "Android 14 / HyperOS style touch navigation bar for tablet use with Niri",
+  "tags": ["Bar", "Touch", "Tablet", "Android", "Navigation"],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "dependencies": {
+    "plugins": []
+  },
+  "metadata": {
+    "defaultSettings": {
+      "showOskButton": true,
+      "showRecentsButton": true
+    }
+  }
+}
