@@ -7,43 +7,44 @@ local function run(command, errorMessage)
   end
 end
 
-local function actionButton(text, glyph, handler)
+local function actionButton(glyph, tooltip, handler, variant)
   return ui.button({
-    text = text,
     glyph = glyph,
-    height = 64,
+    glyphSize = 28,
+    height = 72,
     flexGrow = 1,
+    tooltip = tooltip,
+    variant = variant or "secondary",
     onClick = handler,
   })
 end
 
 local function render()
-  panel.render(ui.column({ flexGrow = 1, gap = 16 }, {
-    ui.row({ align = "center", justify = "space_between", gap = 8 }, {
-      ui.column({ gap = 2, flexGrow = 1 }, {
-        ui.label({ text = "触控控制", fontSize = 18, fontWeight = "bold", color = "on_surface" }),
-        ui.label({ text = "Niri 平板常用操作", color = "on_surface_variant" }),
+  panel.render(ui.column({ flexGrow = 1, gap = 12, padding = 12 }, {
+    ui.row({ align = "center", justify = "space_between", gap = 8, height = 42 }, {
+      ui.glyph({ name = "grip-horizontal", size = 28, color = "primary" }),
+      ui.spacer({ flexGrow = 1 }),
+      ui.button({
+        glyph = "x",
+        width = 44,
+        height = 40,
+        variant = "ghost",
+        tooltip = "收起",
+        onClick = "onClosePanel",
       }),
-      ui.button({ glyph = "x", onClick = "onClosePanel" }),
     }),
 
-    ui.column({ gap = 12, flexGrow = 1 }, {
-      ui.row({ gap = 12 }, {
-        actionButton("屏幕键盘", "keyboard", "onKeyboard"),
-        actionButton("应用启动器", "apps", "onLauncher"),
-      }),
-      ui.row({ gap = 12 }, {
-        actionButton("控制中心", "adjustments-horizontal", "onControlCenter"),
-        actionButton("窗口总览", "layout-grid", "onOverview"),
-      }),
-      ui.row({ gap = 12 }, {
-        actionButton("最大化", "maximize", "onMaximize"),
-        actionButton("全屏", "arrows-maximize", "onFullscreen"),
-      }),
-      ui.row({ gap = 12 }, {
-        actionButton("关闭窗口", "x", "onCloseWindow"),
-        actionButton("关闭屏幕", "power", "onScreenOff"),
-      }),
+    ui.row({ gap = 10 }, {
+      actionButton("apps", "应用", "onLauncher"),
+      actionButton("layout-grid", "最近任务", "onOverview"),
+      actionButton("keyboard", "屏幕键盘", "onKeyboard"),
+      actionButton("adjustments-horizontal", "控制中心", "onControlCenter"),
+    }),
+    ui.row({ gap = 10 }, {
+      actionButton("maximize", "最大化", "onMaximize"),
+      actionButton("arrows-maximize", "全屏", "onFullscreen"),
+      actionButton("x", "关闭窗口", "onCloseWindow", "destructive"),
+      actionButton("power", "关闭屏幕", "onScreenOff"),
     }),
   }))
 end

@@ -3,8 +3,8 @@
 local panelId = "dotredstone/touch-controls:panel"
 
 local function render()
-  barWidget.setGlyph("hand-finger")
-  barWidget.setTooltip("Touch controls")
+  barWidget.setGlyph("grip-horizontal")
+  barWidget.setTooltip("导航与窗口控制")
 end
 
 function update()

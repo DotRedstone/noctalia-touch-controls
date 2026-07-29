@@ -4,9 +4,9 @@
 
 ## Noctalia v5 插件
 
-`touch-controls/` 是原生 Noctalia v5 插件，提供触控友好的栏入口、悬浮软键盘和大按钮控制面板：
+`touch-controls/` 是原生 Noctalia v5 插件，提供触控友好的栏入口、悬浮软键盘和窗口控制面板：
 
-- 独立的返回、全屏与关闭窗口栏按钮
+- 单一导航入口，避免在顶栏堆叠窗口按钮
 - 手机式悬浮软键盘（内嵌候选词、输入框自动呼出、拖动/缩放、Shift/大写锁定、两页符号、输入法切换、粘贴）
 - 应用启动器
 - 控制中心
@@ -27,24 +27,17 @@ kind = "git"
 location = "https://github.com/DotRedstone/noctalia-touch-controls"
 ```
 
-窗口控制栏组件类型为：
+推荐只在顶栏保留一个导航入口：
 
 ```toml
-[widget.back_control]
-type = "dotredstone/touch-controls:back"
-
-[widget.fullscreen_control]
-type = "dotredstone/touch-controls:fullscreen"
-
-[widget.close_window_control]
-type = "dotredstone/touch-controls:close-window"
+[widget.touch_control]
+type = "dotredstone/touch-controls:controls"
 
 [widget.keyboard_control]
 type = "dotredstone/touch-controls:keyboard-toggle"
 ```
 
-原有大按钮控制面板入口仍可使用
-`dotredstone/touch-controls:controls`。
+原有独立返回、全屏与关闭组件仍保留兼容，但不再推荐同时放入顶栏。
 键盘栏按钮会优先调用 `sheng-niri-osk-toggle`，由 sheng 的 GTK4
 layer-shell 键盘接入 Fcitx5 虚拟键盘协议。它不会抢占应用焦点，
 候选词显示在键盘内部，并会跟随输入框焦点自动呼出/收起；顶部手柄可拖动，
@@ -60,13 +53,18 @@ Noctalia 插件 API 15。
 - `sheng-niri-display`
 - `sheng-niri-osk-toggle`
 
-## Niri 边缘手势
+## Niri 导航手势
 
 `dotfiles-sheng` 额外提供由 `lisgd` 驱动的系统级手势：
 
-- 顶部边缘双指下滑：关闭窗口
-- 底部边缘双指上滑：切换全屏
-- 右侧边缘双指左滑：最大化列
+- 左右边缘向内滑：返回；总览打开时退出总览，全屏时先退出全屏
+- 底部短距离上滑：回到第一个工作区
+- 底部长距离上滑：打开最近任务
+- 底部横滑：循环切换相邻窗口
+- 顶部下滑：打开控制中心
+
+关闭窗口和切换全屏属于有破坏性或低频操作，保留在导航控制面板中，
+不再绑定容易误触的边缘手势。
 
 ## 旧版补丁
 
