@@ -1,0 +1,23 @@
+id = "dotredstone/touch-controls"
+name = "Touch Controls"
+version = "1.0.0"
+plugin_api = 3
+min_noctalia = "5.0.0"
+author = "DotRedstone"
+license = "MIT"
+icon = "hand-finger"
+description = "Touch-first controls for Noctalia and Niri tablets."
+tags = ["touch", "tablet", "niri", "utility"]
+dependencies = ["sheng-niri-touch-action", "sheng-niri-osk-toggle", "sheng-niri-display"]
+
+[[widget]]
+id = "controls"
+entry = "widget.luau"
+
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 560
+height = 500
+placement = "floating"
+position = "center"
