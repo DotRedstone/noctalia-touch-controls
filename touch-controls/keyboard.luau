@@ -64,7 +64,6 @@ local function textKey(label, token, width, variant)
     key = token .. "-" .. label,
     text = label,
     fontSize = 20,
-    fontWeight = "medium",
     height = 58,
     width = width,
     flexGrow = width == nil and 1 or nil,
