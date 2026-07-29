@@ -1,5 +1,6 @@
 {
   "nav": {
+    "back": "Back / Close Window",
     "fullscreen": "Toggle Fullscreen",
     "close": "Close Window"
   }

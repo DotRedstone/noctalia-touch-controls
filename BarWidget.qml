@@ -29,7 +29,15 @@ Item {
       anchors.centerIn: parent
       spacing: Style.marginXS
 
-      // 1. 全屏 (Fullscreen)
+      // 1. 返回 (Back / Close)
+      NavButton {
+        iconName: "chevron-left"
+        activeColor: Color.mPrimary
+        tooltip: pluginApi?.tr("nav.back") ?? "Back / Close"
+        onPressedAction: function() { root.runNiriAction("close-window"); }
+      }
+
+      // 2. 全屏 (Fullscreen)
       NavButton {
         iconName: "maximize"
         activeColor: Color.mPrimary
@@ -37,7 +45,7 @@ Item {
         onPressedAction: function() { root.runNiriAction("fullscreen-window"); }
       }
 
-      // 2. 关闭窗口 (Close Window)
+      // 3. 关闭窗口 (Close Window)
       NavButton {
         iconName: "x"
         activeColor: Color.mError
