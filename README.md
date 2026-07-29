@@ -1,35 +1,52 @@
 # Noctalia Touch Controls
 
-触控屏平板（小米平板 6S Pro / Niri 桌面）专用的 Noctalia 与 Niri 触控优化方案与补丁集。
+面向触控屏平板（小米平板 6S Pro / Niri）的 Noctalia 触控控制插件与兼容补丁。
 
-## 包含优化项
+## Noctalia v5 插件
 
-### 1. 启动器触控误触修复 (Launcher Dismiss Fix)
-- **现象**：在触摸屏上尝试滑动/浏览应用列表或点击空白区域时，启动器意外消失。
-- **原因**：Noctalia 启动器 Delegate 及背景遮罩使用 `MouseArea.onClicked`，Qt 触控事件合成 click 直接触发了应用激活和面板关闭。
-- **修复**：将 `MouseArea` 替换为触控原生的 `TapHandler` + `HoverHandler`，区分单点 Tap 与滑动/拖拽手势。
+`touch-controls/` 是原生 Noctalia v5 插件，提供触控友好的栏入口和大按钮控制面板：
 
-### 2. 启动器滑动与触控手势优化 (Launcher Touch Scrolling)
-- **现象**：在触控屏上手指划动列表卡顿或无法触发 Flick 效果。
-- **原因**：`NListView` 与 `NGridView` 的 `interactive` 属性受 mouse input 设置制约，阻碍触控拖拽。
-- **修复**：在 `LauncherCore.qml` 中将 `interactive` 保持为 `true`，确保 `Flickable` 永远响应触控滑动。
+- 屏幕键盘
+- 应用启动器
+- 控制中心
+- Niri 窗口总览
+- 最大化与全屏
+- 关闭窗口与关闭屏幕
 
-### 3. Niri 边缘窗口触控手势 (Niri Edge Touch Gestures)
-- **功能**：
-  - **关闭窗口**：顶部边缘双指下滑 (`2,DU,T`)
-  - **全屏切换**：底部边缘双指上滑 (`2,UD,B`)
-  - **最大化列**：右侧边缘双指左滑 (`2,RL,R`)
+插件 ID 为 `dotredstone/touch-controls`。将本仓库添加为 Noctalia Git 插件源并启用该 ID 即可使用。
 
-## 文件结构
+```toml
+[plugins]
+enabled = ["dotredstone/touch-controls"]
 
-```
-.
-├── patches/
-│   └── launcher-touch-fix.patch  # Noctalia Shell 统一补丁
-└── README.md
+[[plugins.source]]
+name = "dotredstone-touch-controls"
+kind = "git"
+location = "https://github.com/DotRedstone/noctalia-touch-controls"
+auto_update = false
 ```
 
-## 应用方式
+栏组件类型为：
 
-补丁已通过 NixOS Module 整合进 `dotfiles-sheng` 配置中：
-平板运行 `git pull` 后执行 `nrs` (NixOS rebuild switch) 即可编译生效。
+```toml
+[widget.touch_controls]
+type = "dotredstone/touch-controls:controls"
+```
+
+插件调用以下 sheng Niri 辅助命令：
+
+- `sheng-niri-touch-action`
+- `sheng-niri-osk-toggle`
+- `sheng-niri-display`
+
+## Niri 边缘手势
+
+`dotfiles-sheng` 额外提供由 `lisgd` 驱动的系统级手势：
+
+- 顶部边缘双指下滑：关闭窗口
+- 底部边缘双指上滑：切换全屏
+- 右侧边缘双指左滑：最大化列
+
+## 旧版补丁
+
+`patches/launcher-touch-fix.patch` 仅适用于基于 Quickshell/QML 的 Noctalia v4，用于修复启动器滑动误触。Noctalia v5 已改用原生 C++ 界面，不应再应用这份 QML 补丁。
